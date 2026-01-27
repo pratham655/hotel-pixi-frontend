@@ -1,5 +1,5 @@
 // Load room bookings
-fetch("http://localhost:5000/bookings")
+fetch("https://pixi-hotel-backend.onrender.com/bookings")
   .then(res => res.json())
   .then(data => {
     const table = document.getElementById("bookingTable");
@@ -12,7 +12,7 @@ fetch("http://localhost:5000/bookings")
   });
 
 // Load food orders
-fetch("http://localhost:5000/orders")
+fetch("https://pixi-hotel-backend.onrender.com/orders")
   .then(res => res.json())
   .then(data => {
     const table = document.getElementById("orderTable");

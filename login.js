@@ -4,7 +4,7 @@ function login() {
     password: document.getElementById("password").value
   };
 
-  fetch("http://localhost:5000/login", {
+  fetch(("https://pixi-hotel-backend.onrender.com/login"), {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

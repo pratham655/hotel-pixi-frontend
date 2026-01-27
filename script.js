@@ -15,7 +15,8 @@ function bookRoom() {
     return;
   }
 
-  fetch("http://localhost:5000/book", {
+  fetch("https://pixi-hotel-backend.onrender.com/order")
+ {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -63,7 +64,8 @@ function orderFood() {
     status: "Confirmed"
   };
 
-  fetch("http://localhost:5000/order", {
+  fetch(fetch("https://pixi-hotel-backend.onrender.com/book")
+ {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
