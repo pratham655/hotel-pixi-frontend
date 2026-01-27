@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hotel Pixi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Hotel Pixi </h1>
+    <p>Comfort. Calm. Class.</p>
+
+    <!-- ROOM BOOKING SECTION -->
+    <h2>Book a Room</h2>
+
+    <input id="name" placeholder="Your Name">
+    <input id="email" placeholder="Email Address">
+
+    <select id="room">
+      <option value="">Select Room Type</option>
+      <option value="Single">Single Room</option>
+      <option value="Deluxe">Deluxe Room</option>
+      <option value="Suite">Suite</option>
+    </select>
+
+    <input id="date" type="date">
+
+    <br><br>
+    <button onclick="bookRoom()">Book Now</button>
+
+    <p id="result"></p>
+
+    <hr>
+
+    <!-- RESTAURANT SECTION -->
+    <h2>Restaurant Menu </h2>
+
+    <select id="food">
+      <option value="">Select Cuisine</option>
+
+      <optgroup label="Asian">
+        <option value="Fried Rice">Fried Rice</option>
+        <option value="Noodles">Noodles</option>
+      </optgroup>
+
+      <optgroup label="Italian">
+        <option value="Pizza">Pizza</option>
+        <option value="Pasta">Pasta</option>
+      </optgroup>
+
+      <optgroup label="Mexican">
+        <option value="Tacos">Tacos</option>
+        <option value="Burrito">Burrito</option>
+      </optgroup>
+
+      <optgroup label="Continental">
+        <option value="Grilled Chicken">Grilled Chicken</option>
+        <option value="Salad">Salad</option>
+      </optgroup>
+    </select>
+
+    <input id="quantity" type="number" placeholder="Quantity">
+
+    <br><br>
+    <button onclick="orderFood()">Order Food</button>
+
+    <p id="foodResult"></p>
+
+  </div>
+<hr>
+
+<h2>Payment </h2>
+
+<select id="paymentMethod">
+  <option value="">Select Payment Method</option>
+  <option value="UPI">UPI</option>
+  <option value="Card">Card</option>
+  <option value="Cash">Cash</option>
+</select>
+
+<br><br>
+<button onclick="makePayment()">Pay Now</button>
+
+<p id="paymentResult"></p>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

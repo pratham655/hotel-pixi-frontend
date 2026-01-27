@@ -1,0 +1,54 @@
+// BOOK ROOM FUNCTION
+function bookRoom() {
+  const bookingData = {
+    name: document.getElementById("name").value,
+    room: document.getElementById("room").value,
+    date: document.getElementById("date").value
+  };
+
+  fetch("http://localhost:5000/book", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(bookingData)
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("result").innerText = data.message;
+  })
+  .catch(err => {
+    document.getElementById("result").innerText = "Error booking room";
+  });
+}
+
+
+// ORDER FOOD FUNCTION
+function orderFood() {
+  const orderData = {
+    food: document.getElementById("food").value,
+    quantity: document.getElementById("quantity").value
+  };
+
+  fetch("http://localhost:5000/order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(orderData)
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("foodResult").innerText = data.message;
+  })
+  .catch(err => {
+    document.getElementById("foodResult").innerText = "Error placing order";
+  });
+}
+
+
+// PAYMENT DEMO FUNCTION
+function pay() {
+  document.getElementById("payMsg").innerText =
+    "Payment successful ✅ (Demo)";
+}
