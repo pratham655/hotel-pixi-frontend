@@ -1,55 +1,96 @@
+const backendURL = "https://pixi-hotel-backend.onrender.com";
 
+let roomCost = 0;
+let foodCost = 0;
 
-const BASE_URL = "https://pixi-hotel-backend.onrender.com";
+function calculateRoomPrice() {
+  const prices = {
+    Single: 2000,
+    Deluxe: 3500,
+    Suite: 6000
+  };
 
-const prices = {
-  Pizza: 250,
-  Pasta: 220,
-  "Grilled Chicken": 300,
-  Salad: 150,
-  "Fried Rice": 180,
-  Noodles: 160,
-  Tacos: 200,
-  Burrito: 240
-};
+  const room = document.getElementById("room").value;
+  roomCost = prices[room] || 0;
+  document.getElementById("roomPrice").innerText = roomCost;
+  updateFinalBill();
+}
 
-window.onload = () => {
-  const food = document.getElementById("food");
-  const qty = document.getElementById("quantity");
+function calculateFoodPrice() {
+  const prices = {
+    Biryani: 300,
+    Pasta: 220,
+    Tacos: 250,
+    Steak: 400,
+    Noodles: 200
+  };
 
-  food.onchange = updatePrice;
-  qty.oninput = updatePrice;
+  const food = document.getElementById("food").value;
+  const qty = document.getElementById("quantity").value || 0;
+  foodCost = (prices[food] || 0) * qty;
 
-  function updatePrice() {
-    const item = food.value;
-    const q = Number(qty.value) || 0;
-    document.getElementById("price").innerText =
-      prices[item] ? prices[item] * q : 0;
-  }
-};
+  document.getElementById("foodPrice").innerText = foodCost;
+  updateFinalBill();
+}
+
+function updateFinalBill() {
+  document.getElementById("finalBill").innerText = roomCost + foodCost;
+}
 
 function bookRoom() {
-  fetch(`${BASE_URL}/book`, { method: "POST" })
-    .then(r => r.json())
-    .then(d => {
-      document.getElementById("result").innerText = d.message;
-    });
+  fetch(`${backendURL}/book`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: name.value,
+      email: email.value,
+      room: room.value,
+      date: date.value,
+      price: roomCost
+    })
+  })
+  .then(res => res.json())
+  .then(() => {
+    document.getElementById("roomResult").innerText = " Room Booking Confirmed!";
+  });
 }
 
 function orderFood() {
-  const total = document.getElementById("price").innerText;
-  fetch(`${BASE_URL}/order`, { method: "POST" })
-    .then(r => r.json())
-    .then(d => {
-      document.getElementById("foodResult").innerText =
-        `${d.message} | Total ₹${total}`;
-    });
+  fetch(`${backendURL}/order`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      food: food.value,
+      quantity: quantity.value,
+      price: foodCost
+    })
+  })
+  .then(res => res.json())
+  .then(() => {
+    document.getElementById("foodResult").innerText =
+      ` Food Order Confirmed! Total ₹${foodCost}`;
+  });
 }
 
-function payNow() {
-  fetch(`${BASE_URL}/pay`, { method: "POST" })
-    .then(r => r.json())
-    .then(d => {
-      document.getElementById("payMsg").innerText = d.message;
-    });
+function makePayment() {
+  const mode = document.getElementById("paymentMode").value;
+
+  if (!mode) {
+    alert("Select payment mode");
+    return;
+  }
+
+  fetch(`${backendURL}/pay`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      total: roomCost + foodCost,
+      mode: mode
+    })
+  })
+  .then(res => res.json())
+  .then(() => {
+    document.getElementById("paymentResult").innerText =
+      ` Payment Successful via ${mode}`;
+  });
 }
