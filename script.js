@@ -1,53 +1,37 @@
+const BACKEND = "https://pixi-hotel-backend.onrender.com";
+
+// ROOM PRICES
 const roomPrices = {
   Single: 1500,
   Deluxe: 2500,
   Suite: 4000
 };
 
-const foodPrices = {
-  Pizza: 250,
-  Burger: 180,
-  Pasta: 220,
-  Biryani: 300,
-  "Grilled Chicken": 350
-};
-
-let finalFoodPrice = 0;
-
-// ROOM PRICE
-function calculateRoomPrice() {
+function updateRoomPrice() {
   const room = document.getElementById("room").value;
   document.getElementById("roomPrice").innerText = roomPrices[room] || 0;
 }
 
-// BOOK ROOM
 function bookRoom() {
-  document.getElementById("result").innerText = "✅ Room Booking Confirmed!";
+  const data = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    age: document.getElementById("age").value,
+    gender: document.getElementById("gender").value,
+    room: document.getElementById("room").value,
+    date: document.getElementById("date").value,
+    price: document.getElementById("roomPrice").innerText
+  };
+
+  fetch(`${BACKEND}/book`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(res => {
+    document.getElementById("result").innerText = res.message;
+  });
 }
 
-// FOOD PRICE
-function calculateFoodPrice() {
-  const food = document.getElementById("food").value;
-  const qty = document.getElementById("quantity").value || 0;
-
-  finalFoodPrice = (foodPrices[food] || 0) * qty;
-  document.getElementById("foodPrice").innerText = finalFoodPrice;
-}
-
-// ORDER FOOD
-function orderFood() {
-  document.getElementById("foodResult").innerText =
-    `✅ Food Ordered | Total ₹${finalFoodPrice}`;
-}
-
-// PAYMENT
-function pay() {
-  const method = document.getElementById("paymentMethod").value;
-  if (!method) {
-    alert("Select payment method");
-    return;
-  }
-  document.getElementById("payResult").innerText =
-    `✅ Payment Successful via ${method}`;
-}
 

@@ -30,6 +30,32 @@
 
   <button onclick="bookRoom()">Book Room</button>
   <p id="result"></p>
+<h2>Book a Room</h2>
+
+<input id="name" placeholder="Full Name">
+<input id="email" placeholder="Email">
+<input id="age" type="number" placeholder="Age">
+
+<select id="gender">
+  <option value="">Select Gender</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+  <option value="Other">Other</option>
+</select>
+
+<select id="room" onchange="updateRoomPrice()">
+  <option value="">Select Room</option>
+  <option value="Single">Single Room</option>
+  <option value="Deluxe">Deluxe Room</option>
+  <option value="Suite">Suite</option>
+</select>
+
+<input id="date" type="date">
+
+<p>Room Price: ₹<span id="roomPrice">0</span></p>
+
+<button onclick="bookRoom()">Book Room</button>
+<p id="result"></p>
 
   <hr>
 
