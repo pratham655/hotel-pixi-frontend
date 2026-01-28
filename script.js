@@ -1,76 +1,55 @@
+
+
 const BASE_URL = "https://pixi-hotel-backend.onrender.com";
 
-// FOOD PRICE LOGIC
 const prices = {
   Pizza: 250,
-  Burger: 180,
   Pasta: 220,
-  Biryani: 300
+  "Grilled Chicken": 300,
+  Salad: 150,
+  "Fried Rice": 180,
+  Noodles: 160,
+  Tacos: 200,
+  Burrito: 240
 };
 
-window.onload = function () {
+window.onload = () => {
   const food = document.getElementById("food");
-  const quantity = document.getElementById("quantity");
+  const qty = document.getElementById("quantity");
 
-  food.addEventListener("change", updatePrice);
-  quantity.addEventListener("input", updatePrice);
+  food.onchange = updatePrice;
+  qty.oninput = updatePrice;
 
   function updatePrice() {
     const item = food.value;
-    const qty = Number(quantity.value) || 0;
-    const total = prices[item] ? prices[item] * qty : 0;
-    document.getElementById("price").innerText = total;
+    const q = Number(qty.value) || 0;
+    document.getElementById("price").innerText =
+      prices[item] ? prices[item] * q : 0;
   }
 };
 
-// ROOM BOOKING
 function bookRoom() {
-  const data = {
-    name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
-    room: document.getElementById("room").value,
-    date: document.getElementById("date").value
-  };
-
-  fetch(`${BASE_URL}/book`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  })
-    .then(res => res.json())
-    .then(res => {
-      document.getElementById("result").innerText =
-        "✅ Room Booking Confirmed!";
-    })
-    .catch(() => {
-      document.getElementById("result").innerText =
-        "❌ Room booking failed";
+  fetch(`${BASE_URL}/book`, { method: "POST" })
+    .then(r => r.json())
+    .then(d => {
+      document.getElementById("result").innerText = d.message;
     });
 }
 
-// FOOD ORDER
 function orderFood() {
-  const food = document.getElementById("food").value;
-  const qty = Number(document.getElementById("quantity").value);
-  const amount = prices[food] * qty;
-
-  fetch(`${BASE_URL}/order`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      food,
-      quantity: qty,
-      amount
-    })
-  })
-    .then(res => res.json())
-    .then(() => {
+  const total = document.getElementById("price").innerText;
+  fetch(`${BASE_URL}/order`, { method: "POST" })
+    .then(r => r.json())
+    .then(d => {
       document.getElementById("foodResult").innerText =
-        `✅ Food Order Confirmed! Total Bill ₹${amount}`;
-    })
-    .catch(() => {
-      document.getElementById("foodResult").innerText =
-        "❌ Food order failed";
+        `${d.message} | Total ₹${total}`;
     });
 }
 
+function payNow() {
+  fetch(`${BASE_URL}/pay`, { method: "POST" })
+    .then(r => r.json())
+    .then(d => {
+      document.getElementById("payMsg").innerText = d.message;
+    });
+}
