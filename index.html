@@ -15,7 +15,7 @@
   <h2>Book a Room</h2>
 
   <input id="name" placeholder="Full Name">
-  <input id="email" placeholder="Email Address">
+  <input id="email" placeholder="Email">
   <input id="age" type="number" placeholder="Age">
 
   <select id="gender">
@@ -25,8 +25,8 @@
     <option value="Other">Other</option>
   </select>
 
-  <select id="room">
-    <option value="">Select Room Type</option>
+  <select id="room" onchange="calculateRoomPrice()">
+    <option value="">Select Room</option>
     <option value="Single">Single Room</option>
     <option value="Deluxe">Deluxe Room</option>
     <option value="Suite">Suite</option>
@@ -37,40 +37,42 @@
   <p>Room Price: ₹<span id="roomPrice">0</span></p>
 
   <button onclick="bookRoom()">Book Room</button>
-  <p id="result"></p>
+  <p id="roomMsg"></p>
 
   <hr>
 
   <!-- FOOD ORDER -->
   <h2>Restaurant Menu</h2>
 
-  <select id="food">
+  <select id="food" onchange="calculateFoodPrice()">
     <option value="">Select Food</option>
     <option value="Pizza">Pizza (Italian)</option>
-    <option value="Burger">Burger (Fast Food)</option>
     <option value="Pasta">Pasta (Italian)</option>
     <option value="Biryani">Biryani (Asian)</option>
-    <option value="Grilled Chicken">Grilled Chicken (Continental)</option>
+    <option value="Burger">Burger (Fast Food)</option>
+    <option value="GrilledChicken">Grilled Chicken (Continental)</option>
   </select>
 
-  <input id="quantity" type="number" placeholder="Quantity">
+  <input id="quantity" type="number" placeholder="Quantity" oninput="calculateFoodPrice()">
 
-  <p>Food Total: ₹<span id="price">0</span></p>
+  <p>Food Total: ₹<span id="foodPrice">0</span></p>
 
   <button onclick="orderFood()">Order Food</button>
-  <p id="foodResult"></p>
+  <p id="foodMsg"></p>
 
   <hr>
 
   <!-- PAYMENT -->
   <h2>Payment</h2>
 
-  <select id="payMethod">
+  <select id="paymentMethod">
     <option value="">Select Payment Method</option>
     <option value="UPI">UPI</option>
     <option value="Card">Card</option>
     <option value="Cash">Cash</option>
   </select>
+
+  <p><strong>Final Bill: ₹<span id="finalBill">0</span></strong></p>
 
   <button onclick="pay()">Pay</button>
   <p id="payMsg"></p>
@@ -80,4 +82,5 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
