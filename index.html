@@ -26,7 +26,7 @@
 
   <input id="date" type="date">
 
-  <p><strong>Room Price: ₹<span id="roomPrice">0</span></strong></p>
+  <p>Room Price: ₹<span id="roomPrice">0</span></p>
 
   <button onclick="bookRoom()">Book Room</button>
   <p id="result"></p>
@@ -39,7 +39,7 @@
   <select id="food" onchange="calculateFoodPrice()">
     <option value="">Select Food</option>
     <option value="Pizza">Pizza (Italian)</option>
-    <option value="Burger">Burger (Fast Food)</option>
+    <option value="Burger">Burger (American)</option>
     <option value="Pasta">Pasta (Italian)</option>
     <option value="Biryani">Biryani (Asian)</option>
     <option value="Grilled Chicken">Grilled Chicken (Continental)</option>
@@ -47,7 +47,7 @@
 
   <input id="quantity" type="number" placeholder="Quantity" oninput="calculateFoodPrice()">
 
-  <p><strong>Food Total: ₹<span id="foodPrice">0</span></strong></p>
+  <p>Food Total: ₹<span id="foodPrice">0</span></p>
 
   <button onclick="orderFood()">Order Food</button>
   <p id="foodResult"></p>
@@ -59,17 +59,18 @@
 
   <select id="paymentMethod">
     <option value="">Select Payment Method</option>
-    <option value="Cash">Cash</option>
-    <option value="Card">Card</option>
     <option value="UPI">UPI</option>
+    <option value="Card">Card</option>
+    <option value="Cash">Cash</option>
   </select>
 
   <button onclick="pay()">Pay</button>
-  <p id="payMsg"></p>
+  <p id="payResult"></p>
 
 </div>
 
 <script src="script.js"></script>
 </body>
 </html>
+
 
