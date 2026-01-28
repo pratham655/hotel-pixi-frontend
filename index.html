@@ -7,6 +7,7 @@
 
 <body>
 <div class="container">
+
   <h1>Hotel Pixi</h1>
   <p>Comfort. Calm. Class.</p>
 
@@ -14,21 +15,21 @@
   <h2>Book a Room</h2>
 
   <input id="name" placeholder="Your Name">
-  <input id="email" placeholder="Email">
+  <input id="email" placeholder="Email Address">
 
   <select id="room" onchange="calculateRoomPrice()">
-    <option value="">Select Room</option>
-    <option value="Single">Single Room – ₹2000</option>
-    <option value="Deluxe">Deluxe Room – ₹3500</option>
-    <option value="Suite">Suite – ₹6000</option>
+    <option value="">Select Room Type</option>
+    <option value="Single">Single Room</option>
+    <option value="Deluxe">Deluxe Room</option>
+    <option value="Suite">Suite</option>
   </select>
 
   <input id="date" type="date">
 
-  <p>Room Price: ₹<span id="roomPrice">0</span></p>
+  <p><strong>Room Price: ₹<span id="roomPrice">0</span></strong></p>
 
   <button onclick="bookRoom()">Book Room</button>
-  <p id="roomResult"></p>
+  <p id="result"></p>
 
   <hr>
 
@@ -37,16 +38,16 @@
 
   <select id="food" onchange="calculateFoodPrice()">
     <option value="">Select Food</option>
-    <option value="Biryani">Biryani (Indian) – ₹300</option>
-    <option value="Pasta">Pasta (Italian) – ₹220</option>
-    <option value="Tacos">Tacos (Mexican) – ₹250</option>
-    <option value="Steak">Steak (Continental) – ₹400</option>
-    <option value="Noodles">Noodles (Asian) – ₹200</option>
+    <option value="Pizza">Pizza (Italian)</option>
+    <option value="Burger">Burger (Fast Food)</option>
+    <option value="Pasta">Pasta (Italian)</option>
+    <option value="Biryani">Biryani (Asian)</option>
+    <option value="Grilled Chicken">Grilled Chicken (Continental)</option>
   </select>
 
   <input id="quantity" type="number" placeholder="Quantity" oninput="calculateFoodPrice()">
 
-  <p>Food Price: ₹<span id="foodPrice">0</span></p>
+  <p><strong>Food Total: ₹<span id="foodPrice">0</span></strong></p>
 
   <button onclick="orderFood()">Order Food</button>
   <p id="foodResult"></p>
@@ -56,17 +57,16 @@
   <!-- PAYMENT -->
   <h2>Payment</h2>
 
-  <select id="paymentMode">
-    <option value="">Select Payment Mode</option>
+  <select id="paymentMethod">
+    <option value="">Select Payment Method</option>
     <option value="Cash">Cash</option>
     <option value="Card">Card</option>
     <option value="UPI">UPI</option>
   </select>
 
-  <p><strong>Final Bill: ₹<span id="finalBill">0</span></strong></p>
+  <button onclick="pay()">Pay</button>
+  <p id="payMsg"></p>
 
-  <button onclick="makePayment()">Pay</button>
-  <p id="paymentResult"></p>
 </div>
 
 <script src="script.js"></script>
